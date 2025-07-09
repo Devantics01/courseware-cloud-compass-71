@@ -36,34 +36,38 @@ export const AssignmentGrading: React.FC<AssignmentGradingProps> = ({ assignment
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
+    <div className="w-full">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Pending Grading</h2>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="self-start sm:self-auto">
           View All
         </Button>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         {assignments.map((assignment) => (
-          <div key={assignment.id} className="assignment-item group">
-            <div className="flex items-start justify-between w-full">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  {getPriorityIcon(assignment.priority)}
-                  <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                    {assignment.assignment}
-                  </h3>
-                  <Badge className={getPriorityColor(assignment.priority)}>
-                    {assignment.priority}
-                  </Badge>
+          <div key={assignment.id} className="assignment-item group bg-white dark:bg-gray-700 rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-600">
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between w-full gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {getPriorityIcon(assignment.priority)}
+                    <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors text-sm sm:text-base">
+                      {assignment.assignment}
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Badge className={`${getPriorityColor(assignment.priority)} text-xs`}>
+                      {assignment.priority}
+                    </Badge>
+                  </div>
                 </div>
                 
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 break-words">
                   {assignment.course}
                 </p>
                 
-                <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-3">
                   <div className="flex items-center gap-1">
                     <Users size={14} />
                     <span>{assignment.submissions}/{assignment.totalStudents} submitted</span>
@@ -74,21 +78,21 @@ export const AssignmentGrading: React.FC<AssignmentGradingProps> = ({ assignment
                   </div>
                 </div>
 
-                <div className="mt-2">
-                  <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
+                <div className="w-full">
+                  <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                     <div 
-                      className="bg-purple-500 h-1.5 rounded-full transition-all duration-300"
+                      className="bg-purple-500 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${(assignment.submissions / assignment.totalStudents) * 100}%` }}
                     ></div>
                   </div>
                 </div>
               </div>
               
-              <div className="flex gap-2 ml-4">
-                <Button variant="outline" size="sm">
+              <div className="flex flex-row sm:flex-col lg:flex-row gap-2 w-full sm:w-auto lg:w-auto justify-end">
+                <Button variant="outline" size="sm" className="flex-1 sm:flex-none text-xs sm:text-sm">
                   Review
                 </Button>
-                <Button size="sm" className="bg-purple-500 hover:bg-purple-600">
+                <Button size="sm" className="bg-purple-500 hover:bg-purple-600 flex-1 sm:flex-none text-xs sm:text-sm">
                   Grade
                 </Button>
               </div>
