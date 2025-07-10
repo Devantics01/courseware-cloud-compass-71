@@ -3,244 +3,272 @@ import React, { useState } from 'react';
 import { HodLayout } from '@/components/hod/HodLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
-import { TrendingUp, TrendingDown, Users, Book, Calendar, Award } from 'lucide-react';
+import { TrendingUp, TrendingDown, Users, BookOpen, Calendar, Award, Download, Filter } from 'lucide-react';
 
 const HodAnalytics = () => {
-  const [selectedMetric, setSelectedMetric] = useState('enrollment');
+  const [timeRange, setTimeRange] = useState('semester');
 
   const enrollmentData = [
-    { month: 'Aug', students: 420 },
-    { month: 'Sep', students: 445 },
-    { month: 'Oct', students: 456 },
-    { month: 'Nov', students: 468 },
-    { month: 'Dec', students: 475 },
-    { month: 'Jan', students: 456 }
+    { name: 'CS 101', students: 45, capacity: 50 },
+    { name: 'CS 201', students: 38, capacity: 40 },
+    { name: 'CS 301', students: 32, capacity: 35 },
+    { name: 'CS 401', students: 28, capacity: 30 },
+    { name: 'CS 501', students: 15, capacity: 20 }
   ];
 
-  const coursePerformanceData = [
-    { course: 'CS 101', satisfaction: 4.2, completion: 92 },
-    { course: 'CS 201', satisfaction: 4.5, completion: 88 },
-    { course: 'CS 301', satisfaction: 4.0, completion: 85 },
-    { course: 'CS 401', satisfaction: 4.7, completion: 90 },
-    { course: 'CS 501', satisfaction: 4.3, completion: 87 }
+  const performanceData = [
+    { month: 'Aug', average: 78, passingRate: 82 },
+    { month: 'Sep', average: 81, passingRate: 85 },
+    { month: 'Oct', average: 79, passingRate: 83 },
+    { month: 'Nov', average: 84, passingRate: 88 },
+    { month: 'Dec', average: 82, passingRate: 86 }
   ];
 
-  const facultyDistribution = [
-    { name: 'Professors', value: 8, color: '#10b981' },
-    { name: 'Associate Professors', value: 9, color: '#3b82f6' },
-    { name: 'Assistant Professors', value: 5, color: '#f59e0b' },
-    { name: 'Lecturers', value: 2, color: '#ef4444' }
-  ];
-
-  const departmentMetrics = [
-    {
-      title: 'Student Satisfaction',
-      value: '4.3/5.0',
-      change: '+0.2',
-      trend: 'up',
-      icon: Award,
-      color: 'text-green-600'
-    },
-    {
-      title: 'Course Completion Rate',
-      value: '89%',
-      change: '+3%',
-      trend: 'up',
-      icon: Book,
-      color: 'text-blue-600'
-    },
-    {
-      title: 'Faculty Utilization',
-      value: '96%',
-      change: '+1%',
-      trend: 'up',
-      icon: Users,
-      color: 'text-purple-600'
-    },
-    {
-      title: 'Research Publications',
-      value: '127',
-      change: '+15',
-      trend: 'up',
-      icon: TrendingUp,
-      color: 'text-orange-600'
-    }
+  const facultyData = [
+    { name: 'Excellent', value: 65, color: '#10B981' },
+    { name: 'Good', value: 25, color: '#3B82F6' },
+    { name: 'Average', value: 8, color: '#F59E0B' },
+    { name: 'Needs Improvement', value: 2, color: '#EF4444' }
   ];
 
   return (
     <HodLayout>
-      <div className="space-y-6 animate-fade-in">
-        <div className="flex justify-between items-center">
+      <div className="space-y-4 sm:space-y-6 animate-fade-in">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Department Analytics</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Data-driven insights for department performance</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Analytics</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">Department performance insights</p>
           </div>
-          <div className="flex gap-2">
-            <select
-              value={selectedMetric}
-              onChange={(e) => setSelectedMetric(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-            >
-              <option value="enrollment">Enrollment</option>
-              <option value="performance">Performance</option>
-              <option value="satisfaction">Satisfaction</option>
-            </select>
-            <Button variant="outline">
-              Export Data
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+            <div className="flex gap-2">
+              <Button
+                variant={timeRange === 'semester' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setTimeRange('semester')}
+                className="flex-1 sm:flex-none text-xs sm:text-sm"
+              >
+                Semester
+              </Button>
+              <Button
+                variant={timeRange === 'year' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setTimeRange('year')}
+                className="flex-1 sm:flex-none text-xs sm:text-sm"
+              >
+                Year
+              </Button>
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" size="sm">
+                <Filter className="h-4 w-4 mr-2" />
+                <span className="hidden sm:inline">Filter</span>
+              </Button>
+              <Button variant="outline" size="sm">
+                <Download className="h-4 w-4 mr-2" />
+                <span className="hidden sm:inline">Export</span>
+              </Button>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {departmentMetrics.map((metric, index) => {
-            const Icon = metric.icon;
-            const TrendIcon = metric.trend === 'up' ? TrendingUp : TrendingDown;
-            return (
-              <Card key={index}>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{metric.title}</CardTitle>
-                  <Icon className={`h-4 w-4 ${metric.color}`} />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{metric.value}</div>
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <TrendIcon className={`h-3 w-3 mr-1 ${metric.trend === 'up' ? 'text-green-500' : 'text-red-500'}`} />
-                    {metric.change} from last period
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Total Students
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">456</div>
+              <div className="flex items-center text-xs text-green-600 mt-1">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                +12% from last semester
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium flex items-center gap-2">
+                <BookOpen className="h-4 w-4" />
+                Course Completion
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">92%</div>
+              <div className="flex items-center text-xs text-green-600 mt-1">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                +3% improvement
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium flex items-center gap-2">
+                <Award className="h-4 w-4" />
+                Faculty Rating
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">4.2</div>
+              <div className="flex items-center text-xs text-green-600 mt-1">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                +0.3 points
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                Attendance Rate
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">88%</div>
+              <div className="flex items-center text-xs text-red-600 mt-1">
+                <TrendingDown className="h-3 w-3 mr-1" />
+                -2% this month
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg sm:text-xl">Course Enrollment</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64 sm:h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={enrollmentData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis 
+                      dataKey="name" 
+                      tick={{ fontSize: 12 }}
+                      interval={0}
+                      angle={-45}
+                      textAnchor="end"
+                      height={60}
+                    />
+                    <YAxis tick={{ fontSize: 12 }} />
+                    <Tooltip />
+                    <Bar dataKey="students" fill="#10B981" name="Enrolled" />
+                    <Bar dataKey="capacity" fill="#E5E7EB" name="Capacity" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg sm:text-xl">Academic Performance</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64 sm:h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={performanceData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+                    <YAxis tick={{ fontSize: 12 }} />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="average" stroke="#3B82F6" name="Average Grade" strokeWidth={2} />
+                    <Line type="monotone" dataKey="passingRate" stroke="#10B981" name="Passing Rate" strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+          <Card className="lg:col-span-1">
+            <CardHeader>
+              <CardTitle className="text-lg sm:text-xl">Faculty Performance</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-48 sm:h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={facultyData}
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={60}
+                      dataKey="value"
+                      label={({ name, value }) => `${name}: ${value}%`}
+                      labelStyle={{ fontSize: '10px' }}
+                    >
+                      {facultyData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle className="text-lg sm:text-xl">Key Metrics</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="text-sm font-medium">Student Satisfaction</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Based on surveys</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold">4.1/5</p>
+                      <Badge className="bg-green-100 text-green-800 text-xs">Excellent</Badge>
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Student Enrollment Trend</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={enrollmentData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="students" stroke="#10b981" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Faculty Distribution</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={facultyDistribution}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                  >
-                    {facultyDistribution.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Course Performance Analysis</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={400}>
-              <BarChart data={coursePerformanceData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="course" />
-                <YAxis yAxisId="left" orientation="left" />
-                <YAxis yAxisId="right" orientation="right" />
-                <Tooltip />
-                <Bar yAxisId="left" dataKey="satisfaction" fill="#3b82f6" name="Satisfaction (1-5)" />
-                <Bar yAxisId="right" dataKey="completion" fill="#10b981" name="Completion Rate (%)" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Top Performing Courses</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">CS 401 - Machine Learning</span>
-                  <span className="text-sm text-green-600">4.7/5.0</span>
+                  
+                  <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="text-sm font-medium">Graduation Rate</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Last 3 years</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold">94%</p>
+                      <Badge className="bg-green-100 text-green-800 text-xs">High</Badge>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">CS 201 - Data Structures</span>
-                  <span className="text-sm text-green-600">4.5/5.0</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">CS 501 - Cybersecurity</span>
-                  <span className="text-sm text-green-600">4.3/5.0</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Research Impact</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Publications This Year</span>
-                  <span className="text-sm font-medium">127</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Citation Index</span>
-                  <span className="text-sm font-medium">2,456</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Active Grants</span>
-                  <span className="text-sm font-medium">$2.3M</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Key Performance Indicators</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Student Retention</span>
-                  <span className="text-sm font-medium text-green-600">94%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Graduate Employment</span>
-                  <span className="text-sm font-medium text-green-600">87%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Faculty Satisfaction</span>
-                  <span className="text-sm font-medium text-green-600">4.1/5.0</span>
+                
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="text-sm font-medium">Employment Rate</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Within 6 months</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold">87%</p>
+                      <Badge className="bg-blue-100 text-blue-800 text-xs">Good</Badge>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="text-sm font-medium">Research Publications</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">This year</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold">23</p>
+                      <Badge className="bg-purple-100 text-purple-800 text-xs">Active</Badge>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>

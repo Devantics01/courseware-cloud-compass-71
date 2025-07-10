@@ -6,27 +6,17 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, Bell, Shield, Database, Mail, Phone, MapPin, Save, Upload } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
+import { User, Bell, Shield, Database, Mail, Phone, MapPin, Calendar, Save, RefreshCw } from 'lucide-react';
 
 const HodSettings = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const [notifications, setNotifications] = useState({
     email: true,
     push: true,
-    faculty: true,
-    budget: true,
-    meetings: true,
-    reports: false
-  });
-
-  const [profile, setProfile] = useState({
-    name: 'Dr. Wilson',
-    email: 'wilson@university.edu',
-    phone: '+1 (555) 123-4567',
-    office: 'CS Building, Room 301',
-    bio: 'Head of Computer Science Department with 15 years of experience in academic leadership and research.',
-    officeHours: 'Monday-Friday, 2:00 PM - 4:00 PM'
+    sms: false,
+    desktop: true
   });
 
   const tabs = [
@@ -36,379 +26,335 @@ const HodSettings = () => {
     { id: 'department', label: 'Department', icon: Database }
   ];
 
-  const handleNotificationChange = (key: string, value: boolean) => {
-    setNotifications(prev => ({ ...prev, [key]: value }));
-  };
-
-  const handleProfileChange = (key: string, value: string) => {
-    setProfile(prev => ({ ...prev, [key]: value }));
-  };
-
   return (
     <HodLayout>
-      <div className="space-y-6 animate-fade-in">
-        <div className="flex justify-between items-center">
+      <div className="space-y-4 sm:space-y-6 animate-fade-in">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Settings</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Manage your account and department preferences</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Settings</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">Manage your account and preferences</p>
           </div>
-          <Button className="bg-emerald-500 hover:bg-emerald-600">
-            <Save className="h-4 w-4 mr-2" />
-            Save Changes
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm">
+              <RefreshCw className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Reset</span>
+            </Button>
+            <Button className="bg-emerald-500 hover:bg-emerald-600 text-white">
+              <Save className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Save Changes</span>
+              <span className="sm:hidden">Save</span>
+            </Button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <Card>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+          <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle className="text-lg">Settings</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Settings Menu</CardTitle>
             </CardHeader>
-            <CardContent>
-              <nav className="space-y-2">
+            <CardContent className="p-0">
+              <div className="space-y-1">
                 {tabs.map((tab) => {
                   const Icon = tab.icon;
                   return (
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`w-full flex items-center gap-3 px-3 py-2 text-left rounded-lg transition-colors ${
+                      className={`w-full flex items-center gap-3 p-3 sm:p-4 text-left transition-colors ${
                         activeTab === tab.id
-                          ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/20'
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                          ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-r-2 border-emerald-500'
+                          : 'hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
                       }`}
                     >
                       <Icon className="h-4 w-4" />
-                      {tab.label}
+                      <span className="text-sm font-medium">{tab.label}</span>
                     </button>
                   );
                 })}
-              </nav>
+              </div>
             </CardContent>
           </Card>
 
-          <div className="lg:col-span-3">
-            {activeTab === 'profile' && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Profile Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <Avatar className="h-20 w-20">
-                      <AvatarImage src="/placeholder.svg" alt="Profile" />
-                      <AvatarFallback>DW</AvatarFallback>
-                    </Avatar>
+          <Card className="lg:col-span-3">
+            <CardContent className="p-4 sm:p-6">
+              {activeTab === 'profile' && (
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-500 rounded-full flex items-center justify-center text-white text-lg sm:text-xl font-bold">
+                      DW
+                    </div>
                     <div>
-                      <Button variant="outline" className="mb-2">
-                        <Upload className="h-4 w-4 mr-2" />
-                        Change Photo
-                      </Button>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        JPG, PNG or GIF. Max size 2MB.
-                      </p>
+                      <h3 className="text-lg sm:text-xl font-semibold">Dr. Wilson</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">Head of Computer Science Department</p>
+                      <Badge className="bg-emerald-100 text-emerald-800 mt-2">Active</Badge>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input
-                        id="name"
-                        value={profile.name}
-                        onChange={(e) => handleProfileChange('name', e.target.value)}
-                        className="mt-1"
-                      />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="firstName" className="text-sm font-medium">First Name</Label>
+                        <Input id="firstName" defaultValue="David" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="lastName" className="text-sm font-medium">Last Name</Label>
+                        <Input id="lastName" defaultValue="Wilson" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+                        <Input id="email" type="email" defaultValue="d.wilson@university.edu" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="phone" className="text-sm font-medium">Phone</Label>
+                        <Input id="phone" defaultValue="+1 (555) 123-4567" className="mt-1" />
+                      </div>
                     </div>
-                    <div>
-                      <Label htmlFor="email">Email Address</Label>
-                      <div className="relative mt-1">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                        <Input
-                          id="email"
-                          type="email"
-                          value={profile.email}
-                          onChange={(e) => handleProfileChange('email', e.target.value)}
-                          className="pl-10"
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="title" className="text-sm font-medium">Title</Label>
+                        <Input id="title" defaultValue="Professor & Head of Department" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="department" className="text-sm font-medium">Department</Label>
+                        <Input id="department" defaultValue="Computer Science" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="office" className="text-sm font-medium">Office Location</Label>
+                        <Input id="office" defaultValue="CS Building, Room 301" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="extension" className="text-sm font-medium">Extension</Label>
+                        <Input id="extension" defaultValue="ext. 5501" className="mt-1" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="bio" className="text-sm font-medium">Bio</Label>
+                    <Textarea 
+                      id="bio" 
+                      placeholder="Tell us about yourself..."
+                      className="mt-1 min-h-[100px]"
+                      defaultValue="Dr. David Wilson is a distinguished computer scientist with over 15 years of experience in academia and research. He specializes in artificial intelligence and machine learning."
+                    />
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'notifications' && (
+                <div className="space-y-4 sm:space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Notification Preferences</h3>
+                    <div className="space-y-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Mail className="h-4 w-4" />
+                            <span className="text-sm font-medium">Email Notifications</span>
+                          </div>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">Receive notifications via email</p>
+                        </div>
+                        <Switch
+                          checked={notifications.email}
+                          onCheckedChange={(checked) => setNotifications({...notifications, email: checked})}
+                        />
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Bell className="h-4 w-4" />
+                            <span className="text-sm font-medium">Push Notifications</span>
+                          </div>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">Receive push notifications in browser</p>
+                        </div>
+                        <Switch
+                          checked={notifications.push}
+                          onCheckedChange={(checked) => setNotifications({...notifications, push: checked})}
+                        />
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Phone className="h-4 w-4" />
+                            <span className="text-sm font-medium">SMS Notifications</span>
+                          </div>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">Receive important alerts via SMS</p>
+                        </div>
+                        <Switch
+                          checked={notifications.sms}
+                          onCheckedChange={(checked) => setNotifications({...notifications, sms: checked})}
+                        />
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Calendar className="h-4 w-4" />
+                            <span className="text-sm font-medium">Desktop Notifications</span>
+                          </div>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">Show desktop notifications</p>
+                        </div>
+                        <Switch
+                          checked={notifications.desktop}
+                          onCheckedChange={(checked) => setNotifications({...notifications, desktop: checked})}
                         />
                       </div>
                     </div>
-                    <div>
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <div className="relative mt-1">
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                        <Input
-                          id="phone"
-                          value={profile.phone}
-                          onChange={(e) => handleProfileChange('phone', e.target.value)}
-                          className="pl-10"
-                        />
-                      </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Notification Types</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      <label className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer">
+                        <input type="checkbox" defaultChecked className="rounded" />
+                        <span className="text-sm">Faculty Updates</span>
+                      </label>
+                      <label className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer">
+                        <input type="checkbox" defaultChecked className="rounded" />
+                        <span className="text-sm">Course Changes</span>
+                      </label>
+                      <label className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer">
+                        <input type="checkbox" defaultChecked className="rounded" />
+                        <span className="text-sm">Meeting Reminders</span>
+                      </label>
+                      <label className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer">
+                        <input type="checkbox" className="rounded" />
+                        <span className="text-sm">System Updates</span>
+                      </label>
                     </div>
-                    <div>
-                      <Label htmlFor="office">Office Location</Label>
-                      <div className="relative mt-1">
-                        <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                        <Input
-                          id="office"
-                          value={profile.office}
-                          onChange={(e) => handleProfileChange('office', e.target.value)}
-                          className="pl-10"
-                        />
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'security' && (
+                <div className="space-y-4 sm:space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Security Settings</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="currentPassword" className="text-sm font-medium">Current Password</Label>
+                        <Input id="currentPassword" type="password" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="newPassword" className="text-sm font-medium">New Password</Label>
+                        <Input id="newPassword" type="password" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="confirmPassword" className="text-sm font-medium">Confirm New Password</Label>
+                        <Input id="confirmPassword" type="password" className="mt-1" />
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="bio">Biography</Label>
-                    <textarea
-                      id="bio"
-                      value={profile.bio}
-                      onChange={(e) => handleProfileChange('bio', e.target.value)}
-                      className="mt-1 w-full p-3 border border-gray-300 rounded-lg resize-none"
-                      rows={4}
-                    />
+                    <h3 className="text-lg font-semibold mb-4">Two-Factor Authentication</h3>
+                    <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div>
+                          <p className="text-sm font-medium">Two-Factor Authentication</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">Add an extra layer of security to your account</p>
+                        </div>
+                        <Button variant="outline" size="sm">
+                          Enable 2FA
+                        </Button>
+                      </div>
+                    </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="officeHours">Office Hours</Label>
-                    <Input
-                      id="officeHours"
-                      value={profile.officeHours}
-                      onChange={(e) => handleProfileChange('officeHours', e.target.value)}
-                      className="mt-1"
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {activeTab === 'notifications' && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Notification Preferences</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Email Notifications</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Receive notifications via email
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.email}
-                        onCheckedChange={(checked) => handleNotificationChange('email', checked)}
-                      />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Push Notifications</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Receive push notifications in browser
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.push}
-                        onCheckedChange={(checked) => handleNotificationChange('push', checked)}
-                      />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Faculty Updates</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Notifications about faculty activities
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.faculty}
-                        onCheckedChange={(checked) => handleNotificationChange('faculty', checked)}
-                      />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Budget Alerts</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Important budget and financial updates
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.budget}
-                        onCheckedChange={(checked) => handleNotificationChange('budget', checked)}
-                      />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Meeting Reminders</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Reminders for scheduled meetings
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.meetings}
-                        onCheckedChange={(checked) => handleNotificationChange('meetings', checked)}
-                      />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Report Notifications</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Updates on report generation and completion
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.reports}
-                        onCheckedChange={(checked) => handleNotificationChange('reports', checked)}
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {activeTab === 'security' && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Security Settings</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div>
-                    <h4 className="font-medium mb-2">Change Password</h4>
+                    <h3 className="text-lg font-semibold mb-4">Active Sessions</h3>
                     <div className="space-y-3">
+                      <div className="p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                          <div>
+                            <p className="text-sm font-medium">Current Session</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-300">Chrome on Windows • Last active: Now</p>
+                          </div>
+                          <Badge className="bg-green-100 text-green-800 w-fit">Current</Badge>
+                        </div>
+                      </div>
+                      <div className="p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                          <div>
+                            <p className="text-sm font-medium">Mobile Session</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-300">Safari on iOS • Last active: 2 hours ago</p>
+                          </div>
+                          <Button variant="outline" size="sm" className="text-xs">
+                            Revoke
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'department' && (
+                <div className="space-y-4 sm:space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Department Settings</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <Label htmlFor="current-password">Current Password</Label>
-                        <Input id="current-password" type="password" className="mt-1" />
+                        <Label htmlFor="deptName" className="text-sm font-medium">Department Name</Label>
+                        <Input id="deptName" defaultValue="Computer Science" className="mt-1" />
                       </div>
                       <div>
-                        <Label htmlFor="new-password">New Password</Label>
-                        <Input id="new-password" type="password" className="mt-1" />
+                        <Label htmlFor="deptCode" className="text-sm font-medium">Department Code</Label>
+                        <Input id="deptCode" defaultValue="CS" className="mt-1" />
                       </div>
                       <div>
-                        <Label htmlFor="confirm-password">Confirm New Password</Label>
-                        <Input id="confirm-password" type="password" className="mt-1" />
+                        <Label htmlFor="building" className="text-sm font-medium">Building</Label>
+                        <Input id="building" defaultValue="Computer Science Building" className="mt-1" />
                       </div>
-                      <Button variant="outline">Update Password</Button>
+                      <div>
+                        <Label htmlFor="floor" className="text-sm font-medium">Floor</Label>
+                        <Input id="floor" defaultValue="3rd Floor" className="mt-1" />
+                      </div>
                     </div>
                   </div>
 
-                  <div className="border-t pt-6">
-                    <h4 className="font-medium mb-4">Two-Factor Authentication</h4>
-                    <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Academic Settings</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Add an extra layer of security to your account
-                        </p>
+                        <Label htmlFor="maxStudents" className="text-sm font-medium">Max Students per Course</Label>
+                        <Input id="maxStudents" type="number" defaultValue="50" className="mt-1" />
                       </div>
-                      <Button variant="outline">Enable 2FA</Button>
+                      <div>
+                        <Label htmlFor="gradingScale" className="text-sm font-medium">Grading Scale</Label>
+                        <select className="w-full p-2 border border-gray-300 rounded-md text-sm">
+                          <option>A-F Scale</option>
+                          <option>Percentage</option>
+                          <option>Pass/Fail</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="border-t pt-6">
-                    <h4 className="font-medium mb-4">Recent Activity</h4>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Department Policies</h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between items-center text-sm">
-                        <span>Last login: Today at 9:15 AM</span>
-                        <span className="text-green-600">Current session</span>
-                      </div>
-                      <div className="flex justify-between items-center text-sm">
-                        <span>Previous login: Yesterday at 5:30 PM</span>
-                        <span className="text-gray-500">Chrome on Windows</span>
-                      </div>
-                      <div className="flex justify-between items-center text-sm">
-                        <span>Login attempt: 3 days ago</span>
-                        <span className="text-gray-500">Safari on macOS</span>
-                      </div>
+                      <label className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer">
+                        <input type="checkbox" defaultChecked className="rounded" />
+                        <span className="text-sm">Require faculty approval for course changes</span>
+                      </label>
+                      <label className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer">
+                        <input type="checkbox" defaultChecked className="rounded" />
+                        <span className="text-sm">Enable student course evaluations</span>
+                      </label>
+                      <label className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer">
+                        <input type="checkbox" className="rounded" />
+                        <span className="text-sm">Allow cross-department enrollment</span>
+                      </label>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {activeTab === 'department' && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Department Settings</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div>
-                    <Label htmlFor="dept-name">Department Name</Label>
-                    <Input
-                      id="dept-name"
-                      value="Computer Science"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="dept-code">Department Code</Label>
-                    <Input
-                      id="dept-code"
-                      value="CS"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="budget-limit">Annual Budget Limit</Label>
-                    <Input
-                      id="budget-limit"
-                      value="$2,500,000"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="max-faculty">Maximum Faculty Count</Label>
-                    <Input
-                      id="max-faculty"
-                      value="30"
-                      type="number"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="semester-system">Semester System</Label>
-                    <select
-                      id="semester-system"
-                      className="mt-1 w-full p-2 border border-gray-300 rounded-lg"
-                    >
-                      <option>Fall/Spring/Summer</option>
-                      <option>Quarterly</option>
-                      <option>Trimester</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-4">
-                    <h4 className="font-medium">Department Permissions</h4>
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">Allow faculty to create new courses</span>
-                        <Switch defaultChecked />
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">Require HOD approval for budget requests</span>
-                        <Switch defaultChecked />
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">Enable student feedback collection</span>
-                        <Switch defaultChecked />
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">Allow cross-department course enrollment</span>
-                        <Switch />
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </div>
     </HodLayout>
