@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
@@ -17,6 +17,17 @@ export const RadioSidebar: React.FC<RadioSidebarProps> = ({ items }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Auto-hide sidebar after opening on mobile
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        setIsOpen(false);
+      }, 5000); // Auto-hide after 5 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -57,7 +68,7 @@ export const RadioSidebar: React.FC<RadioSidebarProps> = ({ items }) => {
         {isOpen && (
           <button
             onClick={() => setIsOpen(false)}
-            className="md:hidden absolute top-3 right-3 z-41 p-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+            className="md:hidden absolute top-3 right-3 z-41 p-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-75 hover:opacity-100 transition-opacity"
           >
             <X className="w-5 h-5 text-gray-700 dark:text-gray-300" />
           </button>
