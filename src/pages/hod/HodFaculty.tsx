@@ -85,55 +85,55 @@ const HodFaculty = () => {
 
   return (
     <HodLayout>
-      <div className="space-y-6 animate-fade-in">
-        <div className="flex justify-between items-center">
+      <div className="space-y-4 sm:space-y-6 animate-fade-in px-4 sm:px-0">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Faculty Management</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Manage department faculty members and their assignments</p>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">Faculty Management</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-2">Manage department faculty members and their assignments</p>
           </div>
-          <Button className="bg-emerald-500 hover:bg-emerald-600">
+          <Button className="bg-emerald-500 hover:bg-emerald-600 text-sm">
             <Plus className="h-4 w-4 mr-2" />
             Add Faculty
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Total Faculty</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">Total Faculty</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">24</div>
+              <div className="text-lg sm:text-2xl font-bold">24</div>
               <p className="text-xs text-muted-foreground">+2 new this semester</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Active</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">Active</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">22</div>
+              <div className="text-lg sm:text-2xl font-bold">22</div>
               <p className="text-xs text-muted-foreground">91.7% active rate</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">On Leave</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">On Leave</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">2</div>
+              <div className="text-lg sm:text-2xl font-bold">2</div>
               <p className="text-xs text-muted-foreground">Medical & sabbatical</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Avg. Course Load</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">Avg. Course Load</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">2.8</div>
+              <div className="text-lg sm:text-2xl font-bold">2.8</div>
               <p className="text-xs text-muted-foreground">Courses per faculty</p>
             </CardContent>
           </Card>
@@ -141,16 +141,16 @@ const HodFaculty = () => {
 
         <Card>
           <CardHeader>
-            <div className="flex justify-between items-center">
-              <CardTitle>Faculty Directory</CardTitle>
-              <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+              <CardTitle className="text-sm sm:text-base">Faculty Directory</CardTitle>
+              <div className="flex flex-col sm:flex-row gap-2">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                   <Input
                     placeholder="Search faculty..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 w-64"
+                    className="pl-10 w-full sm:w-64 text-sm"
                   />
                 </div>
                 <select
@@ -167,21 +167,21 @@ const HodFaculty = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {filteredFaculty.map((faculty) => (
-                <div key={faculty.id} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <div className="flex items-center gap-4">
-                    <Avatar className="h-12 w-12">
+                <div key={faculty.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg gap-3">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <Avatar className="h-10 w-10 sm:h-12 sm:w-12">
                       <AvatarImage src={`/placeholder.svg`} alt={faculty.name} />
-                      <AvatarFallback>{faculty.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                      <AvatarFallback className="text-xs sm:text-sm">{faculty.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                     </Avatar>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">{faculty.name}</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">{faculty.position}</p>
-                      <div className="flex items-center gap-4 mt-1">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">{faculty.name}</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{faculty.position}</p>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mt-1">
                         <div className="flex items-center gap-1">
                           <Mail className="h-3 w-3 text-gray-400" />
-                          <span className="text-xs text-gray-500">{faculty.email}</span>
+                          <span className="text-xs text-gray-500 truncate">{faculty.email}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Phone className="h-3 w-3 text-gray-400" />
@@ -191,9 +191,9 @@ const HodFaculty = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <Badge className={getStatusColor(faculty.status)}>
+                  <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
+                    <div className="text-left sm:text-right">
+                      <Badge className={getStatusColor(faculty.status)} variant="secondary">
                         {faculty.status.replace('-', ' ')}
                       </Badge>
                       <p className="text-xs text-gray-500 mt-1">

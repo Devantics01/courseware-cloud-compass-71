@@ -95,55 +95,55 @@ const HodCourses = () => {
 
   return (
     <HodLayout>
-      <div className="space-y-6 animate-fade-in">
-        <div className="flex justify-between items-center">
+      <div className="space-y-4 sm:space-y-6 animate-fade-in px-4 sm:px-0">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Course Oversight</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Monitor and manage department courses</p>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">Course Oversight</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-2">Monitor and manage department courses</p>
           </div>
-          <Button className="bg-emerald-500 hover:bg-emerald-600">
+          <Button className="bg-emerald-500 hover:bg-emerald-600 text-sm">
             <Plus className="h-4 w-4 mr-2" />
             Add Course
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">Total Courses</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">18</div>
+              <div className="text-lg sm:text-2xl font-bold">18</div>
               <p className="text-xs text-muted-foreground">This semester</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Total Enrollment</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">Total Enrollment</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">456</div>
+              <div className="text-lg sm:text-2xl font-bold">456</div>
               <p className="text-xs text-muted-foreground">+12% from last term</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Avg. Class Size</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">Avg. Class Size</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">25.3</div>
+              <div className="text-lg sm:text-2xl font-bold">25.3</div>
               <p className="text-xs text-muted-foreground">Students per course</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Capacity Utilization</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium">Capacity Utilization</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">84%</div>
+              <div className="text-lg sm:text-2xl font-bold">84%</div>
               <p className="text-xs text-muted-foreground">Overall utilization</p>
             </CardContent>
           </Card>
@@ -151,16 +151,16 @@ const HodCourses = () => {
 
         <Card>
           <CardHeader>
-            <div className="flex justify-between items-center">
-              <CardTitle>Course Directory</CardTitle>
-              <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+              <CardTitle className="text-sm sm:text-base">Course Directory</CardTitle>
+              <div className="flex flex-col sm:flex-row gap-2">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                   <Input
                     placeholder="Search courses..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 w-64"
+                    className="pl-10 w-full sm:w-64 text-sm"
                   />
                 </div>
                 <select
@@ -176,34 +176,36 @@ const HodCourses = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {filteredCourses.map((course) => (
-                <div key={course.id} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <div className="flex justify-between items-start">
+                <div key={course.id} className="p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-3">
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                        <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 dark:text-white">
                           {course.code}: {course.title}
                         </h3>
-                        <Badge variant="secondary">{course.credits} Credits</Badge>
-                        <Badge className="bg-emerald-100 text-emerald-800">{course.status}</Badge>
+                        <div className="flex gap-2">
+                          <Badge variant="secondary" className="text-xs">{course.credits} Credits</Badge>
+                          <Badge className="bg-emerald-100 text-emerald-800 text-xs">{course.status}</Badge>
+                        </div>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
                         <div className="flex items-center gap-2">
-                          <Users className="h-4 w-4" />
+                          <Users className="h-3 w-3 sm:h-4 sm:w-4" />
                           <span>Instructor: {course.instructor}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Clock className="h-4 w-4" />
+                          <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                           <span>{course.schedule}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4" />
+                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                           <span>Room: {course.room}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <BarChart3 className="h-4 w-4" />
+                          <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
                           <span className={getEnrollmentColor(course.enrolled, course.capacity)}>
                             {course.enrolled}/{course.capacity} enrolled
                           </span>
@@ -212,10 +214,10 @@ const HodCourses = () => {
                     </div>
                     
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="text-xs">
                         View Details
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="text-xs">
                         Edit
                       </Button>
                     </div>

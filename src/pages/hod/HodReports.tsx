@@ -120,29 +120,29 @@ const HodReports = () => {
 
   return (
     <HodLayout>
-      <div className="space-y-6 animate-fade-in">
-        <div className="flex justify-between items-center">
+      <div className="space-y-4 sm:space-y-6 animate-fade-in px-4 sm:px-0">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Department Reports</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Generate and manage department analytics and reports</p>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">Department Reports</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-2">Generate and manage department analytics and reports</p>
           </div>
-          <Button className="bg-emerald-500 hover:bg-emerald-600">
+          <Button className="bg-emerald-500 hover:bg-emerald-600 text-sm">
             <FileText className="h-4 w-4 mr-2" />
             Generate Report
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {quickStats.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <Card key={index}>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                  <Icon className={`h-4 w-4 ${stat.color}`} />
+                  <CardTitle className="text-xs sm:text-sm font-medium">{stat.title}</CardTitle>
+                  <Icon className={`h-3 w-3 sm:h-4 sm:w-4 ${stat.color}`} />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{stat.value}</div>
+                  <div className="text-lg sm:text-2xl font-bold">{stat.value}</div>
                   <p className="text-xs text-muted-foreground">{stat.change}</p>
                 </CardContent>
               </Card>
@@ -150,11 +150,11 @@ const HodReports = () => {
           })}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
           <Card className="lg:col-span-2">
             <CardHeader>
-              <div className="flex justify-between items-center">
-                <CardTitle>Report Library</CardTitle>
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <CardTitle className="text-sm sm:text-base">Report Library</CardTitle>
                 <select
                   value={selectedPeriod}
                   onChange={(e) => setSelectedPeriod(e.target.value)}
@@ -167,20 +167,20 @@ const HodReports = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {reports.map((report) => {
                   const TypeIcon = getTypeIcon(report.type);
                   return (
-                    <div key={report.id} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div key={report.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg gap-3">
                       <div className="flex items-start gap-3">
                         <div className="p-2 bg-white dark:bg-gray-600 rounded-lg">
-                          <TypeIcon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                          <TypeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-300" />
                         </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900 dark:text-white">{report.title}</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{report.description}</p>
-                          <div className="flex items-center gap-4 mt-2">
-                            <Badge className={getStatusColor(report.status)}>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">{report.title}</h3>
+                          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">{report.description}</p>
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-2">
+                            <Badge className={getStatusColor(report.status)} variant="secondary">
                               {report.status.replace('-', ' ')}
                             </Badge>
                             <span className="text-xs text-gray-500">{report.period}</span>
@@ -196,23 +196,23 @@ const HodReports = () => {
                       <div className="flex items-center gap-2">
                         {report.status === 'completed' && (
                           <>
-                            <div className="text-right text-xs text-gray-500">
+                            <div className="text-left sm:text-right text-xs text-gray-500">
                               <p>{report.size}</p>
                               <p>{report.pages} pages</p>
                             </div>
-                            <Button variant="outline" size="sm">
-                              <Download className="h-4 w-4 mr-1" />
+                            <Button variant="outline" size="sm" className="text-xs">
+                              <Download className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                               Download
                             </Button>
                           </>
                         )}
                         {report.status === 'in-progress' && (
-                          <Button variant="outline" size="sm" disabled>
+                          <Button variant="outline" size="sm" disabled className="text-xs">
                             Processing...
                           </Button>
                         )}
                         {report.status === 'scheduled' && (
-                          <Button variant="outline" size="sm">
+                          <Button variant="outline" size="sm" className="text-xs">
                             View Schedule
                           </Button>
                         )}
@@ -226,27 +226,27 @@ const HodReports = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
+              <CardTitle className="text-sm sm:text-base">Quick Actions</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <Button className="w-full justify-start" variant="outline">
-                <TrendingUp className="h-4 w-4 mr-2" />
+            <CardContent className="space-y-2 sm:space-y-3">
+              <Button className="w-full justify-start text-xs sm:text-sm" variant="outline">
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Enrollment Report
               </Button>
-              <Button className="w-full justify-start" variant="outline">
-                <Users className="h-4 w-4 mr-2" />
+              <Button className="w-full justify-start text-xs sm:text-sm" variant="outline">
+                <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Faculty Assessment
               </Button>
-              <Button className="w-full justify-start" variant="outline">
-                <Book className="h-4 w-4 mr-2" />
+              <Button className="w-full justify-start text-xs sm:text-sm" variant="outline">
+                <Book className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Course Evaluation
               </Button>
-              <Button className="w-full justify-start" variant="outline">
-                <FileText className="h-4 w-4 mr-2" />
+              <Button className="w-full justify-start text-xs sm:text-sm" variant="outline">
+                <FileText className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Budget Analysis
               </Button>
-              <Button className="w-full justify-start" variant="outline">
-                <Calendar className="h-4 w-4 mr-2" />
+              <Button className="w-full justify-start text-xs sm:text-sm" variant="outline">
+                <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Schedule Report
               </Button>
             </CardContent>
@@ -255,32 +255,32 @@ const HodReports = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Upcoming Report Deadlines</CardTitle>
+            <CardTitle className="text-sm sm:text-base">Upcoming Report Deadlines</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white">Annual Faculty Review</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Due: January 31, 2024</p>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 sm:p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg gap-2">
+                <div className="min-w-0">
+                  <h4 className="font-medium text-gray-900 dark:text-white text-sm">Annual Faculty Review</h4>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Due: January 31, 2024</p>
                 </div>
-                <Badge variant="secondary">7 days left</Badge>
+                <Badge variant="secondary" className="text-xs">7 days left</Badge>
               </div>
               
-              <div className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white">Semester Budget Report</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Due: February 15, 2024</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 sm:p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg gap-2">
+                <div className="min-w-0">
+                  <h4 className="font-medium text-gray-900 dark:text-white text-sm">Semester Budget Report</h4>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Due: February 15, 2024</p>
                 </div>
-                <Badge variant="secondary">21 days left</Badge>
+                <Badge variant="secondary" className="text-xs">21 days left</Badge>
               </div>
               
-              <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white">Accreditation Report</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Due: March 1, 2024</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 sm:p-3 bg-green-50 dark:bg-green-900/20 rounded-lg gap-2">
+                <div className="min-w-0">
+                  <h4 className="font-medium text-gray-900 dark:text-white text-sm">Accreditation Report</h4>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Due: March 1, 2024</p>
                 </div>
-                <Badge variant="secondary">35 days left</Badge>
+                <Badge variant="secondary" className="text-xs">35 days left</Badge>
               </div>
             </div>
           </CardContent>
