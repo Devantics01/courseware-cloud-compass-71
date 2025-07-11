@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { HodLayout } from '@/components/hod/HodLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -204,7 +203,6 @@ const HodAnalytics = () => {
                       outerRadius={60}
                       dataKey="value"
                       label={({ name, value }) => `${name}: ${value}%`}
-                      labelStyle={{ fontSize: '10px' }}
                     >
                       {facultyData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />

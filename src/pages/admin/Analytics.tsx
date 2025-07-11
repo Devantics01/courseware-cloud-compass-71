@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -204,7 +203,6 @@ const Analytics = () => {
                       outerRadius={60}
                       dataKey="value"
                       label={({ name, value }) => `${name}: ${value}%`}
-                      labelStyle={{ fontSize: '10px' }}
                     >
                       {systemUsageData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
