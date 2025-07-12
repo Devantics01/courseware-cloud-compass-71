@@ -120,7 +120,7 @@ const HodReports = () => {
 
   return (
     <HodLayout>
-      <div className="space-y-4 sm:space-y-6 animate-fade-in px-4 sm:px-0">
+      <div className="space-y-2 sm:space-y-3 animate-fade-in px-2 sm:px-0">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">Department Reports</h1>
