@@ -166,8 +166,8 @@ const HodReports = () => {
                 </select>
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3 sm:space-y-4">
+            <CardContent className="p-3 sm:p-6">
+              <div className="space-y-2 sm:space-y-3">
                 {reports.map((report) => {
                   const TypeIcon = getTypeIcon(report.type);
                   return (
