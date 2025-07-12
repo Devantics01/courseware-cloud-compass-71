@@ -85,20 +85,20 @@ const HeadOfDepartment: React.FC = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
+      <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Head of Department</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Manage department heads and their responsibilities</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Head of Department</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">Manage department heads and their responsibilities</p>
           </div>
-          <Button className="bg-red-600 hover:bg-red-700">
+          <Button className="bg-red-600 hover:bg-red-700 text-sm">
             <UserPlus className="h-4 w-4 mr-2" />
             Assign New HOD
           </Button>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Departments</CardTitle>
@@ -153,22 +153,22 @@ const HeadOfDepartment: React.FC = () => {
         </div>
 
         <Card>
-          <CardHeader>
-            <div className="flex justify-between items-center">
-              <CardTitle>Department Overview</CardTitle>
+          <CardHeader className="p-3 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
+              <CardTitle className="text-base sm:text-lg">Department Overview</CardTitle>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={14} />
                 <Input
                   placeholder="Search departments or HODs..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 w-80"
+                  className="pl-9 text-sm w-full sm:w-64 lg:w-80"
                 />
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <CardContent className="p-3 sm:p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
               {filteredDepartments.map((dept) => (
                 <Card key={dept.id} className="border-l-4 border-l-red-500">
                   <CardHeader>

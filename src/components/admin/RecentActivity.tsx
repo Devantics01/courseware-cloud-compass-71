@@ -45,22 +45,22 @@ export const RecentActivity: React.FC = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Recent Activity</CardTitle>
+      <CardHeader className="p-3 sm:p-6">
+        <CardTitle className="text-base sm:text-lg">Recent Activity</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
+      <CardContent className="p-3 sm:p-6">
+        <div className="space-y-2 sm:space-y-4">
           {activities.map((activity, index) => {
             const Icon = activity.icon;
             return (
-              <div key={index} className="flex items-start gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                <div className="w-8 h-8 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Icon className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+              <div key={index} className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Icon className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600 dark:text-gray-300" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gray-900 dark:text-white">{activity.message}</p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Clock className="h-3 w-3 text-gray-400" />
+                  <p className="text-xs sm:text-sm text-gray-900 dark:text-white">{activity.message}</p>
+                  <div className="flex items-center gap-1 sm:gap-2 mt-1">
+                    <Clock className="h-2 w-2 sm:h-3 sm:w-3 text-gray-400" />
                     <span className="text-xs text-gray-500 dark:text-gray-400">{activity.time}</span>
                     <Badge variant="outline" className="text-xs">
                       {activity.badge}

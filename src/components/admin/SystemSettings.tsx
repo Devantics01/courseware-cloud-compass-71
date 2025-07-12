@@ -34,26 +34,26 @@ export const SystemSettings: React.FC = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>System Settings</CardTitle>
+      <CardHeader className="p-3 sm:p-6">
+        <CardTitle className="text-base sm:text-lg">System Settings</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-3">
+      <CardContent className="p-3 sm:p-6">
+        <div className="space-y-2 sm:space-y-3">
           {settingsSections.map((section, index) => {
             const Icon = section.icon;
             return (
               <Button
                 key={index}
                 variant="ghost"
-                className="w-full justify-start p-4 h-auto"
+                className="w-full justify-start p-3 sm:p-4 h-auto"
               >
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 ${section.color} rounded-lg flex items-center justify-center`}>
-                    <Icon className="h-5 w-5 text-white" />
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 ${section.color} rounded-lg flex items-center justify-center`}>
+                    <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
                   <div className="text-left">
-                    <p className="font-medium text-gray-900 dark:text-white">{section.title}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{section.description}</p>
+                    <p className="text-sm sm:text-base font-medium text-gray-900 dark:text-white">{section.title}</p>
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{section.description}</p>
                   </div>
                 </div>
               </Button>

@@ -25,33 +25,34 @@ const NotificationSettings: React.FC = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
+      <div className="space-y-3 sm:space-y-4 lg:space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Notification Center</h1>
-          <p className="text-gray-600 dark:text-gray-300 mt-2">Manage system-wide notifications and templates</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Notification Center</h1>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">Manage system-wide notifications and templates</p>
         </div>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Send New Notification</CardTitle>
+          <CardHeader className="p-3 sm:p-6">
+            <CardTitle className="text-base sm:text-lg">Send New Notification</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="p-3 sm:p-6">
+            <div className="space-y-3 sm:space-y-4">
               <Input
                 placeholder="Enter notification message..."
                 value={newNotification}
                 onChange={(e) => setNewNotification(e.target.value)}
+                className="text-sm"
               />
-              <div className="flex gap-2">
-                <Button className="bg-red-600 hover:bg-red-700">
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button className="bg-red-600 hover:bg-red-700 text-sm">
                   <Send className="h-4 w-4 mr-2" />
                   Send to All Users
                 </Button>
-                <Button variant="outline">
+                <Button variant="outline" className="text-sm">
                   <Mail className="h-4 w-4 mr-2" />
                   Send via Email
                 </Button>
-                <Button variant="outline">
+                <Button variant="outline" className="text-sm">
                   <MessageSquare className="h-4 w-4 mr-2" />
                   In-App Only
                 </Button>
@@ -60,7 +61,7 @@ const NotificationSettings: React.FC = () => {
           </CardContent>
         </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Sent</CardTitle>
@@ -114,23 +115,23 @@ const NotificationSettings: React.FC = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
           <Card>
-            <CardHeader>
-              <CardTitle>Recent Notifications</CardTitle>
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg">Recent Notifications</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+            <CardContent className="p-3 sm:p-6">
+              <div className="space-y-3 sm:space-y-4">
                 {notifications.map((notification) => (
-                  <div key={notification.id} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-medium text-gray-900 dark:text-white">{notification.title}</h4>
-                      <Badge variant={notification.type === 'system' ? 'destructive' : notification.type === 'course' ? 'default' : 'outline'}>
+                  <div key={notification.id} className="p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-2 sm:gap-0">
+                      <h4 className="text-sm sm:text-base font-medium text-gray-900 dark:text-white">{notification.title}</h4>
+                      <Badge variant={notification.type === 'system' ? 'destructive' : notification.type === 'course' ? 'default' : 'outline'} className="text-xs self-start">
                         {notification.type}
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{notification.message}</p>
-                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-2">{notification.message}</p>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-gray-500 dark:text-gray-400 gap-1 sm:gap-0">
                       <span>Sent {notification.sent}</span>
                       <span>{notification.recipients.toLocaleString()} recipients</span>
                     </div>
@@ -141,22 +142,22 @@ const NotificationSettings: React.FC = () => {
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Notification Templates</CardTitle>
-              <Button variant="outline" size="sm">
+            <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg">Notification Templates</CardTitle>
+              <Button variant="outline" size="sm" className="text-sm">
                 <Settings className="h-4 w-4 mr-2" />
                 Manage Templates
               </Button>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
+            <CardContent className="p-3 sm:p-6">
+              <div className="space-y-2 sm:space-y-3">
                 {templates.map((template) => (
-                  <div key={template.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div key={template.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg gap-2 sm:gap-0">
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">{template.name}</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{template.type}</p>
+                      <p className="text-sm sm:text-base font-medium text-gray-900 dark:text-white">{template.name}</p>
+                      <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{template.type}</p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <p className="text-sm font-medium text-gray-900 dark:text-white">{template.usage}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">times used</p>
                     </div>
@@ -168,21 +169,21 @@ const NotificationSettings: React.FC = () => {
         </div>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Notification Settings</CardTitle>
+          <CardHeader className="p-3 sm:p-6">
+            <CardTitle className="text-base sm:text-lg">Notification Settings</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button variant="outline" className="h-20 flex flex-col gap-2">
-                <Bell className="h-6 w-6" />
+          <CardContent className="p-3 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              <Button variant="outline" className="h-16 sm:h-20 flex flex-col gap-2 text-sm">
+                <Bell className="h-5 w-5 sm:h-6 sm:w-6" />
                 <span>Push Settings</span>
               </Button>
-              <Button variant="outline" className="h-20 flex flex-col gap-2">
-                <Mail className="h-6 w-6" />
+              <Button variant="outline" className="h-16 sm:h-20 flex flex-col gap-2 text-sm">
+                <Mail className="h-5 w-5 sm:h-6 sm:w-6" />
                 <span>Email Config</span>
               </Button>
-              <Button variant="outline" className="h-20 flex flex-col gap-2">
-                <MessageSquare className="h-6 w-6" />
+              <Button variant="outline" className="h-16 sm:h-20 flex flex-col gap-2 text-sm">
+                <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6" />
                 <span>In-App Settings</span>
               </Button>
             </div>

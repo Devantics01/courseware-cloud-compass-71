@@ -65,70 +65,70 @@ const CourseManagement: React.FC = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
+      <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Course Management</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Manage all courses and their settings</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Course Management</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">Manage all courses and their settings</p>
           </div>
-          <Button className="bg-red-600 hover:bg-red-700">
+          <Button className="bg-red-600 hover:bg-red-700 text-sm">
             <BookOpen className="h-4 w-4 mr-2" />
             Create New Course
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                  <BookOpen className="h-6 w-6 text-white" />
+            <CardContent className="p-3 sm:p-4 lg:p-6">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                  <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">156</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Total Courses</p>
+                  <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">156</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Total Courses</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           
           <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                  <Users className="h-6 w-6 text-white" />
+            <CardContent className="p-3 sm:p-4 lg:p-6">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">2,847</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Total Enrollments</p>
+                  <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">2,847</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Total Enrollments</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
-                  <Calendar className="h-6 w-6 text-white" />
+            <CardContent className="p-3 sm:p-4 lg:p-6">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">12</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Starting This Week</p>
+                  <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">12</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Starting This Week</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
-                  <BookOpen className="h-6 w-6 text-white" />
+            <CardContent className="p-3 sm:p-4 lg:p-6">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                  <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">8</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Draft Courses</p>
+                  <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">8</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Draft Courses</p>
                 </div>
               </div>
             </CardContent>
@@ -136,32 +136,32 @@ const CourseManagement: React.FC = () => {
         </div>
 
         <Card>
-          <CardHeader>
-            <div className="flex justify-between items-center">
-              <CardTitle>All Courses</CardTitle>
+          <CardHeader className="p-3 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
+              <CardTitle className="text-base sm:text-lg">All Courses</CardTitle>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={14} />
                 <Input
                   placeholder="Search courses..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 w-80"
+                  className="pl-9 text-sm w-full sm:w-64 lg:w-80"
                 />
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="p-3 sm:p-6">
+            <div className="space-y-2 sm:space-y-4">
               {filteredCourses.map((course) => (
-                <div key={course.id} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-white" />
+                <div key={course.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg gap-3 sm:gap-0">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-red-500 rounded-lg flex items-center justify-center">
+                      <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">{course.title}</h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Instructor: {course.instructor}</p>
-                      <div className="flex items-center gap-4 mt-1">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white truncate">{course.title}</h3>
+                      <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">Instructor: {course.instructor}</p>
+                      <div className="flex items-center gap-2 sm:gap-4 mt-1">
                         <span className="text-xs text-gray-500 flex items-center gap-1">
                           <Users size={12} />
                           {course.students} students
@@ -173,12 +173,12 @@ const CourseManagement: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Badge variant={course.status === 'Active' ? 'default' : course.status === 'Draft' ? 'outline' : 'secondary'}>
+                  <div className="flex items-center gap-2 sm:gap-3 self-start sm:self-center">
+                    <Badge variant={course.status === 'Active' ? 'default' : course.status === 'Draft' ? 'outline' : 'secondary'} className="text-xs">
                       {course.status}
                     </Badge>
-                    <Button variant="ghost" size="icon">
-                      <MoreHorizontal className="h-4 w-4" />
+                    <Button variant="ghost" size="icon" className="h-6 w-6 sm:h-8 sm:w-8">
+                      <MoreHorizontal className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Button>
                   </div>
                 </div>
