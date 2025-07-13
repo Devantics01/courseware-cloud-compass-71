@@ -112,7 +112,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             <ThemeToggle />
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-3 sm:gap-4 p-3 sm:p-4 overflow-auto">
+        <main className="flex flex-1 flex-col gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 overflow-auto">
           {children}
         </main>
       </div>
